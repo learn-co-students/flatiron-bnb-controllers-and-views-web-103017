@@ -1,0 +1,17 @@
+<h1>Cities</h1>
+<ul>
+  <%@cities.each do |city| %>
+    <li>
+      <%=city.name%>
+      <ul>
+        <% city.neighborhoods.each do |neighborhood| %>
+        <% if neighborhood.listings.available(@start_date, @end_date).count > 0 %>
+          <li>
+            <%=link_to neighborhood.name, neighborhood_path(neighborhood, start_date: @start_date, end_date: @end_date), action: "neighborhoods/:id" %> |
+          </li>
+          <%end%>
+        <% end %>
+      </ul>
+    </li>
+    <%end%>
+</ul>

@@ -22,19 +22,36 @@ class Listing < ActiveRecord::Base
   private
 
   def self.available(start_date, end_date)
-    if start_date && end_date
-      joins(:reservations).
-        where.not(reservations: {check_in: start_date..end_date}) &
-      joins(:reservations).
-        where.not(reservations: {check_out: start_date..end_date})
-    else
-      []
+
+    listings = self.all
+
+    # all_listings = Hash.new(0)
+    # listings = Hash.new(0)
+    openings = []
+
+    listings.each do |listing|
+
+      if listing != []
+        is_available = true
+        listing.reservations.each do |reservation|
+          #binding.pry
+          checkin = reservation.check_in
+          checkout = reservation.check_out
+          if [start_date.to_date, checkin].max < [end_date.to_date, checkout].min
+            is_available = false
+          end
+        end
+        if is_available
+          openings << listing
+        end
+      end
     end
+   openings
   end
 
 
   # it feels to me like part of what makes this complicated is
-  # that we have column in the database called is_host, 
+  # that we have column in the database called is_host,
   # but instead this could just be a method, and then rely on that..
   # not sure if it's worth the effort though.
   def unset_host_as_host

@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'sass-rails', '4.0.2'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'uglifier', '>= 1.3.0'
+gem "byebug"
 
 group :development, :test do
   gem 'rack_session_access'

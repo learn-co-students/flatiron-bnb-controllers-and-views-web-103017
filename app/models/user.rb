@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :listings, :foreign_key => 'host_id'
+  accepts_nested_attributes_for :listings
   has_many :reservations, :through => :listings
   has_many :trips, :foreign_key => 'guest_id', :class_name => "Reservation"
   has_many :reviews, :foreign_key => 'guest_id'

@@ -1,0 +1,25 @@
+<h1>Cities</h1>
+
+<% @cities.each do |city| %>
+  <ul>
+  <h3><%= city.name%></h3>
+
+  <form action="neighborhoods/from_city" method="post">
+
+    <input type="hidden" name= "authenticity_token" value="<%=form_authenticity_token%>" >
+    <% neighborhoods = city.neighborhoods %>
+    <%= collection_select(:neighborhood, :neighborhood_id, neighborhoods, :id, :name)%>
+    <input type="submit" name="submit_neighborhood" value="Go To Neighborhood">
+  </form>
+  </ul>
+<% end %>
+
+
+<!--
+<% @cities.each do |city| %>
+  <label> <%= link_to city.name, city_path(city) %> </label>
+    <% neighborhoods = city.neighborhoods %>
+  <ul><%= collection_select(:neighborhoods, :city_id, neighborhoods, :id, :name)%>
+    <%#= link_to <input type="submit" name="submit_neighborhood" value="Go To Neighborhood">, city.neighborhood_path(city.neighborhood)%> <br>
+  </ul>
+<%end%> -->

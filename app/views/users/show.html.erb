@@ -1,0 +1,63 @@
+<h1><%= @user.name %></h1>
+<h2>Your Upcoming Trips</h2>
+<ul>
+  <%@user.reservations.each do |reservation| %>
+    <li>
+    <%=link_to reservation.listing.title, reservation_path(reservation)%>: <%=reservation.check_in%>-<%=reservation.check_out%>
+    </li>
+  <%end%>
+</ul>
+<br />
+
+<%if @user.is_host == true %>
+<h2>Your Listings</h2>
+<ul>
+    <% @user.listings.each do |listing| %>
+  <li><h3><%= listing.title  %></h3></li>
+  <% end %>
+</ul>
+
+<h2>Reservation</h2>
+    <h3>Pending </h3>
+    <ul>
+      <% @user.listings.each do |listing| %>
+        <% listing.reservations.each do |reservation| %>
+          <% if reservation.status == "pending" %>
+          <li><%= reservation.listing.title %> with <%= reservation.guest.name%>
+            <%= form_for reservation do |f| %>
+              <%= label :status, 'Confirm' %>
+              <%= f.radio_button :status, 'Confirm'  %>
+              <%= label :status, 'Deny' %>
+              <%= f.radio_button :status, 'Deny' %>
+              <%= f.submit "Submit" %>
+            <% end %>
+          <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      </ul
+
+    <h3>Confirmed</h3>
+    <ul>
+      <% @user.listings.each do |listing| %>
+        <% listing.reservations.each do |reservation| %>
+        <% if reservation.status == "accepted" %>
+            <li><%= reservation.listing.title %></li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <h3>Completed </h3>
+  <ul>
+    <% @user.listings.each do |listing| %>
+      <% listing.reservations.each do |reservation| %>
+      <% if reservation.status == "completed" %>
+
+          <li><%= reservation.listing.title %></li>
+      <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+
+<% end %> <!-- end for host -->

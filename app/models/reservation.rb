@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
   has_one :review
 
   validates :check_in, :check_out, presence: true
+  # validates :status, inclusion: {%w(pending confirmed completed)}
   validate :available, :check_out_after_check_in, :guest_and_host_not_the_same
 
   def duration
@@ -16,7 +17,7 @@ class Reservation < ActiveRecord::Base
   end
 
   private
-  
+
 
   def available
     Reservation.where(listing_id: listing.id).where.not(id: id).each do |r|

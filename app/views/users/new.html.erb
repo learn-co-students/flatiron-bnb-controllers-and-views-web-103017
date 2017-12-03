@@ -1,0 +1,16 @@
+<h1>Create New User:</h1>
+<%= form_for @user do |f|%>
+<ul><%= f.label :name%></ul>
+<ul><%= f.text_field :name%></ul>
+
+<h4><ul>Create new Listing</ul></h4>
+<ul><%= f.fields_for :listings do |l|%></ul>
+<ul><%= l.label :title %></ul>
+<ul><%= l.text_field :title %></ul>
+<ul><%= l.label :description %></ul>
+<ul><%= l.text_field :description %></ul>
+<ul><%= l.label :price%></ul>
+<ul><%= l.text_field :price%></ul>
+<%end%>
+<ul><%= f.submit%></ul>
+<%end%>

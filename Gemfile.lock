@@ -187,6 +187,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  byebug
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner

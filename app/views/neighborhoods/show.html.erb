@@ -1,0 +1,9 @@
+<h1><%=@neighborhood.name%></h1>
+<ul>
+<% @neighborhood.listings.available(@start_date, @end_date).each do |listing| %>
+<li>
+    <%=link_to listing.title, listing_path(listing, start_date: @start_date, end_date: @end_date), action: "listings/:id" %> |
+</li>
+<% end %>
+
+</ul>

@@ -1,0 +1,6 @@
+<h2>Your stay at <%= link_to @reservation.listing.title, listing_path(@reservation.listing) %></h1>
+  <ul>
+    <li>Check In: <%=@reservation.check_in%></li>
+    <li>Check Out: <%=@reservation.check_out%></li>
+    <li>Host: <%=@reservation.listing.host.name%></li>
+  </ul>
